@@ -14,6 +14,7 @@ namespace ZachetniyRadaktor.Drawings
         protected Size size;
 
         public event EventHandler appearanceChanged;
+        public event EventHandler colorChanged;
 
         public virtual Color Color
         {
@@ -21,6 +22,7 @@ namespace ZachetniyRadaktor.Drawings
             set
             {
                 color = value;
+                colorChanged?.Invoke(this, EventArgs.Empty);
                 OnAppearanceChanged();
             }
         }
@@ -48,9 +50,7 @@ namespace ZachetniyRadaktor.Drawings
                 OnAppearanceChanged();
             }
         }
-        public Point Center => Position + Size / 2;
-
-        public bool IsEnabled
+        public virtual bool IsEnabled
         {
             get => isEnabled;
             set
@@ -59,6 +59,8 @@ namespace ZachetniyRadaktor.Drawings
                 OnAppearanceChanged();
             }
         }
+        public Point Center => Position + Size / 2;
+
 
         protected Figure(Point position, Size size, Color color)
         {

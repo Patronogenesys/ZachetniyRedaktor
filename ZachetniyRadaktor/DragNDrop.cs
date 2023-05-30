@@ -189,5 +189,13 @@ namespace ZachetniyRadaktor
                 }
             }
         }
+
+        public void OnTimerTick()
+        {
+            foreach (Car c in cars)
+            {
+                c.OnTimerTick();
+            }
+        }
     }
 }

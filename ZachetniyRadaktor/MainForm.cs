@@ -19,6 +19,7 @@ namespace ZachetniyRadaktor
             dragNDrop = new(SpawnArea.Bounds);
             dragNDrop.appearanceChanged += (_, _) => Refresh();
             CreateCheckboxes();
+            timer1.Start();
         }
 
         private void CreateCheckboxes()
@@ -201,5 +202,9 @@ namespace ZachetniyRadaktor
             }
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            dragNDrop.OnTimerTick();
+        }
     }
 }

@@ -34,6 +34,7 @@
             lbWidth = new Label();
             cntWidth = new NumericUpDown();
             btnColor = new Button();
+            btnDrive = new Button();
             ((System.ComponentModel.ISupportInitialize)cntHeight).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cntWidth).BeginInit();
             SuspendLayout();
@@ -96,11 +97,23 @@
             btnColor.UseVisualStyleBackColor = true;
             btnColor.Click += btnColor_Click;
             // 
+            // btnDrive
+            // 
+            btnDrive.Font = new Font("Segoe UI", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDrive.Location = new Point(12, 383);
+            btnDrive.Name = "btnDrive";
+            btnDrive.Size = new Size(328, 48);
+            btnDrive.TabIndex = 6;
+            btnDrive.Text = "Drive!";
+            btnDrive.UseVisualStyleBackColor = true;
+            btnDrive.Click += btnDrive_Click;
+            // 
             // Editor
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(352, 443);
+            Controls.Add(btnDrive);
             Controls.Add(btnColor);
             Controls.Add(lbWidth);
             Controls.Add(lbHeight);
@@ -112,6 +125,7 @@
             Name = "Editor";
             Text = "Editor";
             Paint += Editor_Paint;
+            MouseDown += Editor_MouseDown;
             ((System.ComponentModel.ISupportInitialize)cntHeight).EndInit();
             ((System.ComponentModel.ISupportInitialize)cntWidth).EndInit();
             ResumeLayout(false);
@@ -126,5 +140,6 @@
         private Label lbWidth;
         private NumericUpDown cntWidth;
         private Button btnColor;
+        private Button btnDrive;
     }
 }

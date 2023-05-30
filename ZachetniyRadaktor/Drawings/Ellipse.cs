@@ -20,7 +20,7 @@ namespace ZachetniyRadaktor.Drawings
         }
         protected override bool IsTouched(Point touchPosition)
         {
-            return Math.Pow(touchPosition.X - Center.X, 2d) / Math.Pow(size.Width / 2d, 2d) +
+            return IsEnabled && Math.Pow(touchPosition.X - Center.X, 2d) / Math.Pow(size.Width / 2d, 2d) +
                    Math.Pow(touchPosition.Y - Center.Y, 2d) / Math.Pow(size.Height / 2d, 2d) < 1d;
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             cntRects = new NumericUpDown();
             cntEllipses = new NumericUpDown();
             lbRects = new Label();
@@ -35,6 +36,7 @@
             SpawnArea = new Panel();
             cntCars = new NumericUpDown();
             lbCars = new Label();
+            timer1 = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)cntRects).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cntEllipses).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cntCars).BeginInit();
@@ -102,6 +104,10 @@
             lbCars.TabIndex = 2;
             lbCars.Text = "Cars";
             // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -137,5 +143,6 @@
         private Panel SpawnArea;
         private NumericUpDown cntCars;
         private Label lbCars;
+        private System.Windows.Forms.Timer timer1;
     }
 }
