@@ -15,7 +15,6 @@ namespace ZachetniyRadaktor.Drawings
 
         public event EventHandler appearanceChanged;
         public event EventHandler colorChanged;
-
         public virtual Color Color
         {
             get => color;
@@ -62,11 +61,12 @@ namespace ZachetniyRadaktor.Drawings
         public Point Center => Position + Size / 2;
 
 
-        protected Figure(Point position, Size size, Color color)
+        protected Figure(Point position, Size size, Color color, bool isEnabled = true)
         {
             this.color = color;
             this.position = position;
             this.size = size;
+            this.isEnabled = isEnabled;
         }
 
         public abstract void DrawFigureAt(Graphics gr, Point location);
@@ -112,10 +112,10 @@ namespace ZachetniyRadaktor.Drawings
             isSelected = false;
             OnAppearanceChanged();
         }
-        // "(position) (size) (color)"
+        // "(position) (size) (color) (IsEnabled)"
         public override string ToString()
         {
-            return $"({position.X},{position.Y}) ({size.Width},{size.Height}) ({color.A},{color.R},{color.G},{color.B})";
+            return $"({position.X},{position.Y}) ({size.Width},{size.Height}) ({color.A},{color.R},{color.G},{color.B}) ({isEnabled})";
         }
     }
 }

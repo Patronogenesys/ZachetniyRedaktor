@@ -10,7 +10,7 @@ namespace ZachetniyRadaktor.Drawings
 {
     public class Ellipse : Figure
     {
-        public Ellipse(Point position, Size size, Color color) : base(position, size, color) { }
+        public Ellipse(Point position, Size size, Color color, bool isEnabled = true) : base(position, size, color, isEnabled) { }
 
         public override void DrawFigureAt(Graphics gr, Point location)
         {

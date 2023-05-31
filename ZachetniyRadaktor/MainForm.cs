@@ -222,10 +222,12 @@ namespace ZachetniyRadaktor
             cntEllipses.Value = dragNDrop.EllipsesNum;
             cntCars.Value = dragNDrop.CarsNum;
 
+
+            var er = dragNDrop.enablesRects;
             for (int i = 0; i < cntRects.Value; i++)
             {
                 checkboxesRect[i].Show();
-                checkboxesRect[i].Checked = true;
+                checkboxesRect[i].Checked = er[i];
 
             }
             for (int i = (int)cntRects.Value; i < checkboxesRect.Count; i++)
@@ -234,21 +236,22 @@ namespace ZachetniyRadaktor
                 checkboxesRect[i].Checked = true;
             }
 
+            var ee = dragNDrop.enablesEllipses;
             for (int i = 0; i < cntEllipses.Value; i++)
             {
                 checkboxesEllipse[i].Show();
-                checkboxesEllipse[i].Checked = true;
+                checkboxesEllipse[i].Checked = ee[i];
             }
             for (int i = (int)cntEllipses.Value; i < checkboxesEllipse.Count; i++)
             {
                 checkboxesEllipse[i].Hide();
                 checkboxesEllipse[i].Checked = true;
             }
-
+            var ec = dragNDrop.enablesCars;
             for (int i = 0; i < cntCars.Value; i++)
             {
                 checkboxesCar[i].Show();
-                checkboxesCar[i].Checked = true;
+                checkboxesCar[i].Checked = ec[i];
             }
             for (int i = (int)cntCars.Value; i < checkboxesCar.Count; i++)
             {

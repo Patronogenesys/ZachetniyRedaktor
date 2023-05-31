@@ -36,6 +36,44 @@ namespace ZachetniyRadaktor
 
         public bool unsavedChanges { get; private set; } = true;
 
+
+        public List<bool> enablesRects
+        {
+            get
+            {
+                List<bool> res = new(10);
+                foreach (var f in rects)
+                {
+                    res.Add(f.IsEnabled);
+                }
+                return res;
+            }
+        }
+        public List<bool> enablesEllipses
+        {
+            get
+            {
+                List<bool> res = new(10);
+                foreach (var f in ellipses)
+                {
+                    res.Add(f.IsEnabled);
+                }
+                return res;
+            }
+        }
+        public List<bool> enablesCars
+        {
+            get
+            {
+                List<bool> res = new(10);
+                foreach (var f in cars)
+                {
+                    res.Add(f.IsEnabled);
+                }
+                return res;
+            }
+        }
+
         public int RectsNum
         {
             get => rects.Count;

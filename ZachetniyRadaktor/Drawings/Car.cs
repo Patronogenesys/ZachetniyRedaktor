@@ -90,7 +90,7 @@ namespace ZachetniyRadaktor.Drawings
             right.colorChanged += (_, _) => OnAppearanceChanged();
             AdjustChildrenPosition();
         }
-        public Car(Point position, Size size, Color color, Color colorTop, Color colorMiddle, Color colorLeft, Color colorRight) : base(position, size, color)
+        public Car(Point position, Size size, Color color, Color colorTop, Color colorMiddle, Color colorLeft, Color colorRight, bool isEnabled = true) : base(position, size, color, isEnabled)
         {
             top = new(new(0, 0), new(0, 0), colorTop);
             top.colorChanged += (_, _) => OnAppearanceChanged();
@@ -196,7 +196,7 @@ namespace ZachetniyRadaktor.Drawings
             (byte al, byte rl, byte gl, byte bl) = (left.Color.A, left.Color.R, left.Color.G, left.Color.B);
             (byte ar, byte rr, byte gr, byte br) = (right.Color.A, right.Color.R, right.Color.G, right.Color.B);
 
-            return $"({x},{y}) ({width},{height}) ({a},{r},{g},{b}) ({at},{rt},{gt},{bt}) ({am},{rm},{gm},{bm}) ({al},{rl},{gl},{bl}) ({ar},{rr},{gr},{br})";
+            return $"({x},{y}) ({width},{height}) ({a},{r},{g},{b}) ({at},{rt},{gt},{bt}) ({am},{rm},{gm},{bm}) ({al},{rl},{gl},{bl}) ({ar},{rr},{gr},{br}) ({IsEnabled})";
         }
     }
 }

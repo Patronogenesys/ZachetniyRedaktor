@@ -22,9 +22,10 @@ namespace ZachetniyRadaktor.IO
             if (!FromString(results[0], out Point position)) return false;
             if (!FromString(results[1], out Point sizeTmp)) return false;
             if (!FromString(results[2], out Color color)) return false;
+            if (!bool.TryParse(results[3].Replace("(", "").Replace(")", ""), out bool isEnabled)) return false;
 
             Size size = new Size(sizeTmp);
-            result = new(position, size, color);
+            result = new(position, size, color, isEnabled);
             return true;
         }
 
@@ -36,9 +37,11 @@ namespace ZachetniyRadaktor.IO
             if (!FromString(results[0], out Point position)) return false;
             if (!FromString(results[1], out Point sizeTmp)) return false;
             if (!FromString(results[2], out Color color)) return false;
+            //var a = bool.TryParse(results[3].Replace("(", "").Replace(")", ""), out _);
+            if (!bool.TryParse(results[3].Replace("(", "").Replace(")", ""), out bool isEnabled)) return false;
 
             Size size = new Size(sizeTmp);
-            result = new(position, size, color);
+            result = new(position, size, color, isEnabled);
             return true;
         }
 
@@ -54,9 +57,10 @@ namespace ZachetniyRadaktor.IO
             if (!FromString(results[4], out Color colorMiddle)) return false;
             if (!FromString(results[5], out Color colorLeft)) return false;
             if (!FromString(results[6], out Color colorRight)) return false;
+            if (!bool.TryParse(results[7].Replace("(", "").Replace(")", ""), out bool isEnabled)) return false;
 
             Size size = new Size(sizeTmp);
-            result = new(position, size, color, colorTop, colorMiddle, colorLeft, colorRight);
+            result = new(position, size, color, colorTop, colorMiddle, colorLeft, colorRight, isEnabled);
             return true;
         }
         // "(x,y)"
