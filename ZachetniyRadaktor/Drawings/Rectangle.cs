@@ -26,5 +26,9 @@ namespace ZachetniyRadaktor.Drawings
             SolidBrush brush = new SolidBrush(color);
             gr.FillRectangle(brush, rect);
         }
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

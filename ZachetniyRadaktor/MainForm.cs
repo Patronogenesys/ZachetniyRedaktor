@@ -206,5 +206,15 @@ namespace ZachetniyRadaktor
         {
             dragNDrop.OnTimerTick();
         }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            dragNDrop.Save();
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            dragNDrop.Load();
+        }
     }
 }

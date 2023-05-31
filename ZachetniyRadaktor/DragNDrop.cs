@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZachetniyRadaktor.Drawings;
 using ZachetniyRadaktor.Factories;
+using ZachetniyRadaktor.Factories.Read;
+using ZachetniyRadaktor.Factories.Rnd;
 
 namespace ZachetniyRadaktor
 {
@@ -24,6 +27,10 @@ namespace ZachetniyRadaktor
         private IFactory<Ellipse> ellipseFactory;
         private IFactory<Drawings.Rectangle> rectFactory;
         private IFactory<Car> carFactory;
+
+        private IFactory<IEnumerable<Ellipse>> ellipseReadFactory;
+        private IFactory<IEnumerable<Drawings.Rectangle>> rectReadFactory;
+        private IFactory<IEnumerable<Car>> carReadFactory;
 
         public event EventHandler appearanceChanged;
 
@@ -125,7 +132,9 @@ namespace ZachetniyRadaktor
             ellipseFactory = new EllipseDefaultFactory(spawnArea, 50, 100);
             rectFactory = new RectangleDefaultFactory(spawnArea, 50, 100);
             carFactory = new CarDefaultFactory(spawnArea, 50, 100);
-            
+
+
+
 
             allFigures.Add(ellipses);
             allFigures.Add(rects);
@@ -196,6 +205,52 @@ namespace ZachetniyRadaktor
             {
                 c.OnTimerTick();
             }
+        }
+
+        public void Save()
+        {
+            StreamWriter streamWriter = new("rects.txt");
+            foreach (var f in rects)
+            {
+                var result = f.ToString();
+                streamWriter.WriteLine(f.ToString());
+            }
+            streamWriter.Close();
+
+            streamWriter = new("ellipses.txt");
+            foreach (var f in ellipses)
+            {
+                streamWriter.WriteLine(f.ToString());
+            }
+            streamWriter.Close();
+
+            streamWriter = new("cars.txt");
+            foreach (var f in cars)
+            {
+                streamWriter.WriteLine(f.ToString());
+            }
+            streamWriter.Close();
+        }
+        public void Load()
+        {
+            string[] R = File.ReadAllLines("rects.txt");
+            string[] E = File.ReadAllLines("ellipses.txt");
+            string[] C = File.ReadAllLines("cars.txt");
+
+            rectReadFactory = new RectangleReadFactory(R);
+            ellipseReadFactory = new EllipseReadFactory(E);
+            carReadFactory = new CarReadFactory(C);
+
+            rects = new(rectReadFactory.Create());
+            ellipses= new(ellipseReadFactory.Create());
+            cars = new(carReadFactory.Create());
+
+            allFigures.Clear();
+            allFigures.Add(ellipses);
+            allFigures.Add(rects);
+            allFigures.Add(cars);
+
+            appearanceChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

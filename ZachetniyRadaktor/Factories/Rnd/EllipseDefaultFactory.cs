@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZachetniyRadaktor.Drawings;
 
-namespace ZachetniyRadaktor.Factories
+namespace ZachetniyRadaktor.Factories.Rnd
 {
     internal class EllipseDefaultFactory : FigureDefaultFactory, IFactory<Ellipse>
     {

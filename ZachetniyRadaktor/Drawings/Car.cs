@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ZachetniyRadaktor.Drawings
 {
-    internal class Car : Figure
+    public class Car : Figure
     {
         private Size[] speedStates = {
             new Size(1, 0),
@@ -85,6 +87,18 @@ namespace ZachetniyRadaktor.Drawings
             left = new(new(0, 0), new(0, 0), color);
             left.colorChanged += (_, _) => OnAppearanceChanged();
             right = new(new(0, 0), new(0, 0), color);
+            right.colorChanged += (_, _) => OnAppearanceChanged();
+            AdjustChildrenPosition();
+        }
+        public Car(Point position, Size size, Color color, Color colorTop, Color colorMiddle, Color colorLeft, Color colorRight) : base(position, size, color)
+        {
+            top = new(new(0, 0), new(0, 0), colorTop);
+            top.colorChanged += (_, _) => OnAppearanceChanged();
+            middle = new(new(0, 0), new(0, 0), colorMiddle);
+            middle.colorChanged += (_, _) => OnAppearanceChanged();
+            left = new(new(0, 0), new(0, 0), colorLeft);
+            left.colorChanged += (_, _) => OnAppearanceChanged();
+            right = new(new(0, 0), new(0, 0), colorRight);
             right.colorChanged += (_, _) => OnAppearanceChanged();
             AdjustChildrenPosition();
         }
@@ -169,6 +183,20 @@ namespace ZachetniyRadaktor.Drawings
             right.Position = position;
             right.Size = new Size(WheelRadius, WheelRadius);
         }
+        // "(position) (size) (color) (colorTop) (colorMiddle) (colorLeft) (colorRight)"
+        public override string ToString()
+        {
+            int x = position.X;
+            int y = position.Y;
+            int width = size.Width;
+            int height = size.Height;
+            (byte a, byte r, byte g, byte b) = (color.A, color.R, color.G, color.B);
+            (byte at, byte rt, byte gt, byte bt) = (top.Color.A, top.Color.R, top.Color.G, top.Color.B);
+            (byte am, byte rm, byte gm, byte bm) = ( middle.Color.A, middle.Color.R, middle.Color.G, middle.Color.B);
+            (byte al, byte rl, byte gl, byte bl) = (left.Color.A, left.Color.R, left.Color.G, left.Color.B);
+            (byte ar, byte rr, byte gr, byte br) = (right.Color.A, right.Color.R, right.Color.G, right.Color.B);
 
+            return $"({x},{y}) ({width},{height}) ({a},{r},{g},{b}) ({at},{rt},{gt},{bt}) ({am},{rm},{gm},{bm}) ({al},{rl},{gl},{bl}) ({ar},{rr},{gr},{br})";
+        }
     }
 }

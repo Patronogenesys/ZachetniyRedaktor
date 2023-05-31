@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing.Design;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ZachetniyRadaktor.Drawings
@@ -30,6 +31,11 @@ namespace ZachetniyRadaktor.Drawings
             var color = Color.FromArgb(255 - Color.R, 255 - Color.G, 255 - Color.B);
             SolidBrush brush = new SolidBrush(color);
             gr.FillEllipse(brush, rect);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

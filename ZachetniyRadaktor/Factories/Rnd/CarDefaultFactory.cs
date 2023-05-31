@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ZachetniyRadaktor.Drawings;
 
-namespace ZachetniyRadaktor.Factories
+namespace ZachetniyRadaktor.Factories.Rnd
 {
-    internal class CarDefaultFactory : FigureDefaultFactory , IFactory<Car>
+    internal class CarDefaultFactory : FigureDefaultFactory, IFactory<Car>
     {
         public CarDefaultFactory(System.Drawing.Rectangle createArea, int minDimentions, int maxDimentions) : base(createArea, minDimentions, maxDimentions) { }
 

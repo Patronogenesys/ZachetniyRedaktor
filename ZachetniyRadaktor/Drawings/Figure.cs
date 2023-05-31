@@ -112,5 +112,10 @@ namespace ZachetniyRadaktor.Drawings
             isSelected = false;
             OnAppearanceChanged();
         }
+        // "(position) (size) (color)"
+        public override string ToString()
+        {
+            return $"({position.X},{position.Y}) ({size.Width},{size.Height}) ({color.A},{color.R},{color.G},{color.B})";
+        }
     }
 }

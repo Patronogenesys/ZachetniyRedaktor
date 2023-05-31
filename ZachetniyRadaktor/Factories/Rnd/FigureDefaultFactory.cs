@@ -1,7 +1,7 @@
 ﻿using System.CodeDom.Compiler;
 using ZachetniyRadaktor.Drawings;
 
-namespace ZachetniyRadaktor.Factories
+namespace ZachetniyRadaktor.Factories.Rnd
 {
     internal abstract class FigureDefaultFactory
     {

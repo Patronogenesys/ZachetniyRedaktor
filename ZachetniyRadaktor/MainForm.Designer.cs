@@ -37,6 +37,8 @@
             cntCars = new NumericUpDown();
             lbCars = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
+            btnSave = new Button();
+            btnLoad = new Button();
             ((System.ComponentModel.ISupportInitialize)cntRects).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cntEllipses).BeginInit();
             ((System.ComponentModel.ISupportInitialize)cntCars).BeginInit();
@@ -108,11 +110,33 @@
             // 
             timer1.Tick += timer1_Tick;
             // 
+            // btnSave
+            // 
+            btnSave.Location = new Point(694, 30);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new Size(94, 27);
+            btnSave.TabIndex = 4;
+            btnSave.Text = "Save";
+            btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click;
+            // 
+            // btnLoad
+            // 
+            btnLoad.Location = new Point(694, 63);
+            btnLoad.Name = "btnLoad";
+            btnLoad.Size = new Size(94, 27);
+            btnLoad.TabIndex = 4;
+            btnLoad.Text = "Load";
+            btnLoad.UseVisualStyleBackColor = true;
+            btnLoad.Click += btnLoad_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 559);
+            Controls.Add(btnLoad);
+            Controls.Add(btnSave);
             Controls.Add(SpawnArea);
             Controls.Add(lbCars);
             Controls.Add(lbEllipses);
@@ -144,5 +168,7 @@
         private NumericUpDown cntCars;
         private Label lbCars;
         private System.Windows.Forms.Timer timer1;
+        private Button btnSave;
+        private Button btnLoad;
     }
 }
