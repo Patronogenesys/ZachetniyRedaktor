@@ -146,7 +146,8 @@
             Controls.Add(cntRects);
             DoubleBuffered = true;
             Name = "MainForm";
-            Text = "Form1";
+            Text = "ZachetniyRedaktor";
+            FormClosing += MainForm_FormClosing;
             Paint += Form1_Paint;
             MouseDown += Form1_MouseDown;
             MouseMove += Form1_MouseMove;

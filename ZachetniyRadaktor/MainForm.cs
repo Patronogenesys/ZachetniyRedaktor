@@ -215,6 +215,52 @@ namespace ZachetniyRadaktor
         private void btnLoad_Click(object sender, EventArgs e)
         {
             dragNDrop.Load();
+
+            editor.Hide();
+
+            cntRects.Value = dragNDrop.RectsNum;
+            cntEllipses.Value = dragNDrop.EllipsesNum;
+            cntCars.Value = dragNDrop.CarsNum;
+
+            for (int i = 0; i < cntRects.Value; i++)
+            {
+                checkboxesRect[i].Show();
+                checkboxesRect[i].Checked = true;
+
+            }
+
+            for (int i = 0; i < cntEllipses.Value; i++)
+            {
+                checkboxesEllipse[i].Show();
+                checkboxesEllipse[i].Checked = true;
+            }
+
+            for (int i = 0; i < cntCars.Value; i++)
+            {
+                checkboxesCar[i].Show();
+                checkboxesCar[i].Checked = true;
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            if (dragNDrop.unsavedChanges)
+                switch (MessageBox.Show("Save?",
+                                         "Unsaved changes",
+                                         MessageBoxButtons.YesNoCancel,
+                                         MessageBoxIcon.Question))
+                {
+                    case DialogResult.Yes:
+                        dragNDrop.Save();
+                        break;
+                    case DialogResult.No:
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
+
         }
     }
 }

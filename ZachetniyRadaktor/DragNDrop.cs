@@ -34,6 +34,8 @@ namespace ZachetniyRadaktor
 
         public event EventHandler appearanceChanged;
 
+        public bool unsavedChanges { get; private set; } = true;
+
         public int RectsNum
         {
             get => rects.Count;
@@ -47,7 +49,7 @@ namespace ZachetniyRadaktor
                     for (int i = rects.Count; i > value; i--)
                     {
                         var item = rects[^1];
-                        item.appearanceChanged -= (sender, args) => appearanceChanged?.Invoke(this, EventArgs.Empty);
+                        item.appearanceChanged -= (sender, args) => OnAppearanceChanged();
                         rects.RemoveAt(rects.Count - 1);
                     }
                 }
@@ -56,14 +58,13 @@ namespace ZachetniyRadaktor
                     for (int i = rects.Count; i < value; i++)
                     {
                         Drawings.Rectangle item = rectFactory.Create();
-                        item.appearanceChanged += (sender, args) => appearanceChanged?.Invoke(this, EventArgs.Empty);
+                        item.appearanceChanged += (sender, args) => OnAppearanceChanged();
                         rects.Add(item);
                     }
                 }
-                appearanceChanged?.Invoke(this, EventArgs.Empty);
+                OnAppearanceChanged();
             }
         }
-
         public int EllipsesNum
         {
             get => ellipses.Count;
@@ -78,7 +79,7 @@ namespace ZachetniyRadaktor
                     for (int i = ellipses.Count; i > value; i--)
                     {
                         var item = ellipses[^1];
-                        item.appearanceChanged -= (sender, args) => appearanceChanged?.Invoke(this, EventArgs.Empty);
+                        item.appearanceChanged -= (sender, args) => OnAppearanceChanged();
                         ellipses.RemoveAt(ellipses.Count - 1);
                     }
                 }
@@ -87,11 +88,11 @@ namespace ZachetniyRadaktor
                     for (int i = ellipses.Count; i < value; i++)
                     {
                         var item = ellipseFactory.Create();
-                        item.appearanceChanged += (sender, args) => appearanceChanged?.Invoke(this, EventArgs.Empty);
+                        item.appearanceChanged += (sender, args) => OnAppearanceChanged();
                         ellipses.Add(item);
                     }
                 }
-                appearanceChanged?.Invoke(this, EventArgs.Empty);
+                OnAppearanceChanged();
             }
         }
         public int CarsNum
@@ -108,7 +109,7 @@ namespace ZachetniyRadaktor
                     for (int i = cars.Count; i > value; i--)
                     {
                         var item = cars[^1];
-                        item.appearanceChanged -= (sender, args) => appearanceChanged?.Invoke(this, EventArgs.Empty);
+                        item.appearanceChanged -= (sender, args) => OnAppearanceChanged();
                         cars.RemoveAt(cars.Count - 1);
                     }
                 }
@@ -117,11 +118,11 @@ namespace ZachetniyRadaktor
                     for (int i = cars.Count; i < value; i++)
                     {
                         var item = carFactory.Create();
-                        item.appearanceChanged += (sender, args) => appearanceChanged?.Invoke(this, EventArgs.Empty);
+                        item.appearanceChanged += (sender, args) => OnAppearanceChanged();
                         cars.Add(item);
                     }
                 }
-                appearanceChanged?.Invoke(this, EventArgs.Empty);
+                OnAppearanceChanged();
             }
         }
 
@@ -132,9 +133,6 @@ namespace ZachetniyRadaktor
             ellipseFactory = new EllipseDefaultFactory(spawnArea, 50, 100);
             rectFactory = new RectangleDefaultFactory(spawnArea, 50, 100);
             carFactory = new CarDefaultFactory(spawnArea, 50, 100);
-
-
-
 
             allFigures.Add(ellipses);
             allFigures.Add(rects);
@@ -230,6 +228,7 @@ namespace ZachetniyRadaktor
                 streamWriter.WriteLine(f.ToString());
             }
             streamWriter.Close();
+            unsavedChanges = false;
         }
         public void Load()
         {
@@ -242,7 +241,7 @@ namespace ZachetniyRadaktor
             carReadFactory = new CarReadFactory(C);
 
             rects = new(rectReadFactory.Create());
-            ellipses= new(ellipseReadFactory.Create());
+            ellipses = new(ellipseReadFactory.Create());
             cars = new(carReadFactory.Create());
 
             allFigures.Clear();
@@ -250,7 +249,21 @@ namespace ZachetniyRadaktor
             allFigures.Add(rects);
             allFigures.Add(cars);
 
+            foreach (var figures in allFigures)
+            {
+                foreach (var f in figures)
+                {
+                    f.appearanceChanged += (_, _) => OnAppearanceChanged();
+                }
+            }
+            OnAppearanceChanged();
+            unsavedChanges = false;
+        }
+
+        private void OnAppearanceChanged()
+        {
             appearanceChanged?.Invoke(this, EventArgs.Empty);
+            unsavedChanges = true;
         }
     }
 }
