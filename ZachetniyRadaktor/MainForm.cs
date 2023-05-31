@@ -228,16 +228,31 @@ namespace ZachetniyRadaktor
                 checkboxesRect[i].Checked = true;
 
             }
+            for (int i = (int)cntRects.Value; i < checkboxesRect.Count; i++)
+            {
+                checkboxesRect[i].Hide();
+                checkboxesRect[i].Checked = true;
+            }
 
             for (int i = 0; i < cntEllipses.Value; i++)
             {
                 checkboxesEllipse[i].Show();
                 checkboxesEllipse[i].Checked = true;
             }
+            for (int i = (int)cntEllipses.Value; i < checkboxesEllipse.Count; i++)
+            {
+                checkboxesEllipse[i].Hide();
+                checkboxesEllipse[i].Checked = true;
+            }
 
             for (int i = 0; i < cntCars.Value; i++)
             {
                 checkboxesCar[i].Show();
+                checkboxesCar[i].Checked = true;
+            }
+            for (int i = (int)cntCars.Value; i < checkboxesCar.Count; i++)
+            {
+                checkboxesCar[i].Hide();
                 checkboxesCar[i].Checked = true;
             }
         }
